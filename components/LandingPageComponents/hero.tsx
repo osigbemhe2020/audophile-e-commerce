@@ -1,0 +1,35 @@
+
+import heroImage from "@/assets/home/desktop/image-hero.jpg"
+import Navbar from "../ReusableComponents/navbar"
+
+
+export default function Hero() {
+  return (
+    <div
+  className="relative min-h-screen py-[32px] px-[165px]  bg-cover bg-center"
+  style={{
+    backgroundImage: `url(${heroImage.src})`,
+  }}
+>  <Navbar/>
+      
+          <div className="space-y-6 mt-[109px]">
+            <div className="overline text-white">NEW PRODUCT</div>
+
+            <h1 className="text-white">
+              XX99 MARK II
+              <br />
+              HEADPHONES
+            </h1>
+
+            <p className="text-white/75 max-w-[350px]">
+              Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.
+            </p>
+
+            <button className="button-main mt-1">
+              SEE PRODUCT
+            </button>
+          </div>
+      
+    </div>
+  )
+}

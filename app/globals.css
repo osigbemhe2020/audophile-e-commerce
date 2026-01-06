@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --main-orange: #D87D4A;
+  --main-orange-hover: #FBAF85;
+  --main-black: #151515;
+  --main-grey:#F1F1F1;
+  --black:#000000;
+  --white:#FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+ font-size: 15px; 
+ font-weight: medium;
+}
+h1{
+ font-weight: bold;
+ font-size: 56px;         
+ line-height: 58px;       
+ letter-spacing: 2px; 
+ text-transform: uppercase;
+}
+h2{
+ font-weight: bold;
+ font-size: 40px;         
+ line-height: 44px;       
+ letter-spacing: 1.5px; 
+ text-transform:uppercase;
+}
+h3{
+font-weight: bold;
+font-size: 32px;         
+line-height: 36px;       
+letter-spacing: 1.15px; 
+text-transform:uppercase;
+}
+h4{
+font-weight: bold;
+font-size: 28px;         
+line-height: 38px;       
+letter-spacing: 2px; 
+text-transform:uppercase;
+}
+h5{
+ font-weight: bold;
+ font-size: 24px;         
+ line-height: 33px;       
+ letter-spacing: 1.7px; 
+ text-transform:uppercase;
+}
+h6{
+  font-weight:bold ;
+ font-size: 18px;         
+ line-height: 24px;       
+ letter-spacing: 1.3px; 
+ text-transform:uppercase;
+}
+.subtitle{
+ font-weight: bold;  
+ font-size: 13px;     
+line-height: 25px;       
+letter-spacing: 1px; 
+text-transform:uppercase;
+}
+.overline{
+text-decoration: none;
+font-weight: 400;
+font-size: 14px;         
+line-height: 19px;       
+letter-spacing: 10px; 
+text-transform:uppercase;
+}
+.button-main{
+  background-color: var(--main-orange);
+  color: var(--white);
+  font-weight: bold;
+  font-size: 13px;
+  height: 48px;
+  width: 160px;
+  text-align: center;
+  letter-spacing: 1px;
+  
+}
+.button-main:hover{
+  background-color: var(--main-orange-hover);
+}
+.button-two{
+
+}
+.button-three{
+  
+}
