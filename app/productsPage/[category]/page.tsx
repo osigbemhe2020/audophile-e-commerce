@@ -22,7 +22,7 @@ export default async function CategoryPage({ params }: Props) {
       <div className="flex flex-col items-center justify-center h-screen text-center">
         <h1 className="text-3xl font-bold">Category Not Found</h1>
         <p className="mt-2 text-gray-500">
-          Sorry, we couldn't find that product category.
+          Sorry, we couldnt find that product category.
         </p>
       </div>
     );

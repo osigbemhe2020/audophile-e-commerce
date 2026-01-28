@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import ProductImage from "./product-image"
+import Image from "next/image"
+import type { StaticImageData } from "next/image"
 import ProductDetails from "./products-details"
 import FeaturesSection from "./features-section"
 import InTheBoxSection from "./in-box-section"
@@ -11,9 +12,11 @@ type ProductProps = {
   productName: string;
   features: string;
   inTheBox: string[];
+  mainImage: StaticImageData;
+  gridImages: StaticImageData[];
 };
 
-export default function ProductPage({ productName, features, inTheBox }: ProductProps) {
+export default function ProductPage({ productName, features, inTheBox, mainImage, gridImages }: ProductProps) {
   const [quantity, setQuantity] = useState(1)
 
   const handleAddToCart = () => {
@@ -37,7 +40,15 @@ export default function ProductPage({ productName, features, inTheBox }: Product
       <section className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Product Image */}
-          <ProductImage />
+          <div className="flex items-center justify-center bg-secondary rounded-lg p-8 lg:p-12 min-h-96">
+              <Image 
+                src={mainImage} 
+                alt={productName}
+                width={500}
+                height={500}
+                className="w-full max-w-sm h-auto object-contain"
+              />
+            </div>
 
           {/* Product Details */}
           <ProductDetails

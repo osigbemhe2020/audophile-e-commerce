@@ -1,7 +1,15 @@
+"use client" 
+
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 
-export default function Navbar() {
+interface NavbarProps {
+  isCartOpen: boolean;
+  setIsCartOpen: (open: boolean) => void;
+}
+
+export default function Navbar({ isCartOpen, setIsCartOpen }: NavbarProps) {
+  
   return (
     <nav className="border-b border-[#979797] bg-transparent">
       <div className="max-w-7xl mx-auto pb-[30px] flex items-center justify-between">
@@ -31,7 +39,7 @@ export default function Navbar() {
             </li>
           </ul>
           </div>
-          <div><ShoppingCart size={24} className="text-white cursor-pointer hover:text-orange-500 transition" /></div>
+          <div onClick={() => setIsCartOpen(!isCartOpen)}><ShoppingCart size={24} className="text-white cursor-pointer hover:text-orange-500 transition" /></div>
         
       </div>
     </nav>

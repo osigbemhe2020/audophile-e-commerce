@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    unoptimized: true,
+  },
+  turbopack: {}, // 👈 add this
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(png|jpg|jpeg|gif|svg)$/i,
+      type: "asset",
+    });
+    return config;
+  },
 };
 
 export default nextConfig;
+

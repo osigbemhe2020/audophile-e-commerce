@@ -2,18 +2,25 @@
 
 import OrderItem  from "./order-item"
 import OrderTotals from "./orders-total"
+import CartProducts from "@/lib/mockCartData"
 
-export default function OrderSummary() {
-  const items = [
-    { id: 1, name: "XX99 MK II", price: 2999, quantity: 1, image: "👂" },
-    { id: 2, name: "XX59", price: 899, quantity: 2, image: "👂" },
-    { id: 3, name: "YX1", price: 599, quantity: 1, image: "🎧" },
-  ]
+interface OrderSummaryProps {
+  onCheckout?: () => void;
+}
 
-  const subtotal = 5396
+export default function OrderSummary({ onCheckout }: OrderSummaryProps) {
+  const items = CartProducts.map(product => ({
+    id: parseInt(product.id),
+    name: product.shortName,
+    price: product.price,
+    quantity: product.quantity,
+    image: product.image
+  }))
+
+  const subtotal = CartProducts.reduce((acc, product) => acc + product.price * product.quantity, 0)
   const shipping = 50
-  const vat = 1079
-  const grandTotal = 5446
+  const vat = Math.round(subtotal * 0.2) // 20% VAT
+  const grandTotal = subtotal + shipping + vat
 
   return (
     <div className="bg-white rounded-lg p-6 h-fit sticky top-8">
@@ -27,7 +34,10 @@ export default function OrderSummary() {
 
       <OrderTotals subtotal={subtotal} shipping={shipping} vat={vat} grandTotal={grandTotal} />
 
-      <button className="w-full mt-8 bg-[var(--main-orange)] hover:bg-[var(--main-orange-hover)] text-white font-semibold py-4 px-6 rounded text-sm tracking-wider transition-colors">
+      <button 
+        onClick={onCheckout}
+        className="w-full mt-8 bg-[var(--main-orange)] hover:bg-[var(--main-orange-hover)] text-white font-semibold py-4 px-6 rounded text-sm tracking-wider transition-colors"
+      >
         CONTINUE & PAY
       </button>
     </div>

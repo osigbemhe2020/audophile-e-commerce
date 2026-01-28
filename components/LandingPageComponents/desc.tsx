@@ -17,7 +17,7 @@ export default function Desc() {
             <p className="text-gray-700 leading-relaxed text-base">
               Located at the heart of New York City, AudioStyle is the premier store for high-end headphones, earphones,
               speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you
-              to browse and experience the audio equipment yourself. You'll also get to meet some of the fantastic
+              to browse and experience the audio equipment yourself. You will also get to meet some of the fantastic
               people who make AudioStyle the best place to buy your portable audio equipment.
             </p>
           </div>
