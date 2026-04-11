@@ -1,34 +1,35 @@
+// order-summary.tsx
 "use client"
 
 import OrderItem  from "./order-item"
 import OrderTotals from "./orders-total"
-import CartProducts from "@/lib/mockCartData"
+import { useCartStore } from "@/store/CartStore"
 
 interface OrderSummaryProps {
   onCheckout?: () => void;
 }
 
 export default function OrderSummary({ onCheckout }: OrderSummaryProps) {
-  const items = CartProducts.map(product => ({
-    id: parseInt(product.id),
-    name: product.shortName,
-    price: product.price,
-    quantity: product.quantity,
-    image: product.image
-  }))
-
-  const subtotal = CartProducts.reduce((acc, product) => acc + product.price * product.quantity, 0)
-  const shipping = 50
-  const vat = Math.round(subtotal * 0.2) // 20% VAT
-  const grandTotal = subtotal + shipping + vat
+  const { cartProducts, getTotalItems, calculateTotal } = useCartStore();
+  
+  const subtotal = calculateTotal();
+  const shipping = 50;
+  const vat = Math.round(subtotal * 0.2); // 20% VAT
+  const grandTotal = subtotal + shipping + vat;
 
   return (
     <div className="bg-white rounded-lg p-6 h-fit sticky top-8">
       <h3 className="mb-8">SUMMARY</h3>
 
       <div className="space-y-6 mb-8">
-        {items.map((item) => (
-          <OrderItem key={item.id} item={item} />
+        {cartProducts.map((product) => (
+          <OrderItem key={product.id} item={{
+            id: parseInt(product.id),
+            name: product.shortName,
+            price: product.price,
+            quantity: product.quantity,
+            image: product.image
+          }} />
         ))}
       </div>
 

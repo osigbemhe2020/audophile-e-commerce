@@ -1,19 +1,13 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
-
-interface OrderItem {
-  id: string;
-  name: string;
-  shortName: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { CartProduct } from "@/lib/mockCartData";
 
 interface ThankYouModalProps {
   isOpen: boolean;
   onClose: () => void;
-  items: OrderItem[];
+  items: CartProduct[];
   grandTotal: number;
 }
 
@@ -24,6 +18,13 @@ const ThankYouModal = ({ isOpen, onClose, items, grandTotal }: ThankYouModalProp
 
   const displayedItems = showAllItems ? items : items.slice(0, 1);
   const remainingCount = items.length - 1;
+
+  const router = useRouter();
+
+  const handleBackToHome = () => {
+    router.push('/');
+    onClose();
+  };
 
   return (
     <>
@@ -60,9 +61,11 @@ const ThankYouModal = ({ isOpen, onClose, items, grandTotal }: ThankYouModalProp
                   key={item.id} 
                   className={`flex items-center gap-4 ${index !== displayedItems.length - 1 ? 'mb-4' : ''}`}
                 >
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.name}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-lg object-cover"
                   />
                   <div className="flex-1">
@@ -103,7 +106,7 @@ const ThankYouModal = ({ isOpen, onClose, items, grandTotal }: ThankYouModalProp
 
           {/* Back to Home Button */}
           <button 
-            onClick={onClose}
+            onClick={handleBackToHome}
             className="btn-primary w-full"
           >
             Back to Home

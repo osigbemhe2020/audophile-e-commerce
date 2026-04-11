@@ -3,9 +3,9 @@
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import CheckoutForm from "@/components/checkOutComponents/check-out-form"
-import OrderSummary  from "@/components/checkOutComponents/order-summary"
+import OrderSummary from "@/components/checkOutComponents/order-summary"
 import ThankYouModal from "@/components/modals/ThanksModal"
-import CartProducts from "@/lib/mockCartData"
+import { useCartStore } from "@/store/CartStore"
 
 export default function CheckoutPage() {
   const [isThankYouOpen, setIsThankYouOpen] = useState(false);
@@ -14,10 +14,7 @@ export default function CheckoutPage() {
     setIsThankYouOpen(true);
   };
 
-  const grandTotal = CartProducts.reduce(
-    (acc, product) => acc + product.price * product.quantity,
-    0
-  );
+  const { calculateTotal, cartProducts } = useCartStore();
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
@@ -38,8 +35,8 @@ export default function CheckoutPage() {
         <ThankYouModal 
           isOpen={isThankYouOpen} 
           onClose={() => setIsThankYouOpen(false)}
-          items={CartProducts}
-          grandTotal={grandTotal}
+          grandTotal={calculateTotal()}
+          items={cartProducts}
         />,
         document.body
       )}

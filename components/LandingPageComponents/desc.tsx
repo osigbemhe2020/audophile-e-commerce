@@ -8,7 +8,7 @@ export default function Desc() {
         <div className="flex items-center gap-[125px]">
           {/* Left Content */}
           <div className="flex-1">
-            <h2 className=" mb-8 ">
+            <h2 className=" text-black mb-8 ">
               BRINGING YOU THE
               <br />
               <span className="text-orange-500">BEST</span> AUDIO GEAR

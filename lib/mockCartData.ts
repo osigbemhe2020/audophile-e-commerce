@@ -1,36 +1,43 @@
 
-interface CartProduct {
+// mockCartData.ts
+import cartImage1 from "@/assets/cart/image-xx99-mark-two-headphones.jpg"
+import cartImage2 from "@/assets/cart/image-xx59-headphones.jpg"
+import cartImage3 from "@/assets/cart/image-yx1-earphones.jpg"
+import { StaticImageData } from "next/image";
+import Features from "./featuresData";
+
+export interface CartProduct {
   id: string;
   name: string;
   shortName: string;
   price: number;
   quantity: number;
-  image: string;
+  image: StaticImageData | string;
 }
 const CartProducts: CartProduct[] = [
   {
-    id: "1",
+    id: Features[0].slug,
     name: "XX99 Mark II Headphones",
     shortName: "XX99 MK II",
-    price: 2999,
+    price: Features[0].price,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop",
+    image: cartImage1,
   },
   {
-    id: "2",
+    id: Features[2].slug,
     name: "XX59 Headphones",
     shortName: "XX59",
-    price: 899,
+    price: Features[2].price,
     quantity: 2,
-    image: "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=200&h=200&fit=crop",
+    image: cartImage2,
   },
   {
-    id: "3",
+    id: Features[5].slug,
     name: "YX1 Wireless Earphones",
     shortName: "YX1",
-    price: 599,
+    price: Features[5].price,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200&h=200&fit=crop",
+    image: cartImage3,
   },
 ];
 

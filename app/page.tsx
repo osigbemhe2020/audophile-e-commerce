@@ -3,8 +3,8 @@ import Ads from "@/components/LandingPageComponents/Ads"
 import Desc from "@/components/LandingPageComponents/desc"
 import Footer from "@/components/ReusableComponents/footer"
 
-
 export default function Home() {
+ 
   return (
     <div className="">
        <Hero/>

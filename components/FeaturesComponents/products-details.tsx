@@ -3,40 +3,45 @@
 interface ProductDetailsProps {
   pname : string
   quantity: number
+  price:number;
   onIncrement: () => void
   onDecrement: () => void
   onAddToCart: () => void
+  isAddingToCart?: boolean // ✅ new prop
 }
 
-export default function ProductDetails({ pname, quantity, onIncrement, onDecrement, onAddToCart }: ProductDetailsProps) {
+export default function ProductDetails({ pname, quantity, price, onIncrement, onDecrement, onAddToCart, isAddingToCart}: ProductDetailsProps) {
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-4xl lg:text-5xl font-bold tracking-tighter mb-6">
+      <div className="max-w-[480px]">
+        <p className="text-[var(--main-orange)] overline mb-4">
+                  New Product
+        </p>
+        <h2 className=" font-bold tracking-tighter ">
          {pname}
-        </h1>
-        <p className="text-muted-foreground text-base leading-relaxed">
+        </h2>
+        <p className="my-8 leading-relaxed">
           Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The
           stylish yet durable sennheiser wireless headsets is a brilliant companion at home or on the move.
         </p>
       </div>
 
-      <div className="text-3xl font-bold">$ 899</div>
+      <div className="text-3xl font-bold">$ {price}</div>
 
       <div className="flex items-center gap-4">
         {/* Quantity Selector */}
-        <div className="flex items-center border border-border rounded-lg overflow-hidden bg-secondary">
+        <div className="flex items-center min-h-[50px]  rounded-lg overflow-hidden bg-gray-100">
           <button
             onClick={onDecrement}
-            className="px-4 py-3 text-foreground hover:bg-accent transition-colors"
+            className="px-4 py-3 border-0 "
             aria-label="Decrease quantity"
           >
             −
           </button>
-          <div className="px-6 py-3 min-w-16 text-center font-medium border-l border-r border-border">{quantity}</div>
+          <div className="px-6 py-3 min-w-16 text-center font-medium ">{quantity}</div>
           <button
             onClick={onIncrement}
-            className="px-4 py-3 text-foreground hover:bg-accent transition-colors"
+            className="px-4 py-3 "
             aria-label="Increase quantity"
           >
             +
@@ -46,9 +51,10 @@ export default function ProductDetails({ pname, quantity, onIncrement, onDecreme
         {/* Add to Cart Button */}
         <button
           onClick={onAddToCart}
-          className="button-main"
+          disabled={isAddingToCart}
+          className="button-main disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          ADD TO CART
+          {isAddingToCart ? "ADDING..." : "ADD TO CART"}
         </button>
       </div>
     </div>
