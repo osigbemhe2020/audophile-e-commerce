@@ -4,6 +4,9 @@ import { writeClient } from "@/sanity/lib/writeClient";
 import { client } from "@/sanity/lib/client";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET, // ✅ add this
+  trustHost: true, // ✅ required for Vercel deployment
+
   providers: [
     GitHub({
       clientId: process.env.GITHUB_CLIENT_ID!,
