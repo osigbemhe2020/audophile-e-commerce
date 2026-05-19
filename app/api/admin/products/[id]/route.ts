@@ -6,7 +6,7 @@ const ADMIN_GITHUB_ID = process.env.ADMIN_GITHUB_ID;
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   // ✅ Protect route
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
@@ -16,7 +16,7 @@ export async function PUT(
 
   try {
     const body = await request.json();
-    const { id } = params;
+    const { id } = await context.params;
 
     const updatedProduct = await writeClient
       .patch(id)
@@ -44,7 +44,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   // ✅ Protect route
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
@@ -53,7 +53,7 @@ export async function DELETE(
   }
 
   try {
-    const { id } = params;
+    const { id } = await context.params;
     await writeClient.delete(id);
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
