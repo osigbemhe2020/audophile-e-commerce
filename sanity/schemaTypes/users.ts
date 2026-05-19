@@ -58,5 +58,25 @@ export default {
         },
       ],
     },
+
+    // ✅ New field for Zustand/localStorage cart sync
+    {
+      name: "localCart",
+      title: "Local Cart",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "productId", type: "string", title: "Product ID" },
+            { name: "name", type: "string", title: "Name" },
+            { name: "shortName", type: "string", title: "Short Name" },
+            { name: "price", type: "number", title: "Price" },
+            { name: "quantity", type: "number", title: "Quantity" },
+            { name: "image", type: "string", title: "Image URL" },
+          ],
+        },
+      ],
+    },
   ],
 };

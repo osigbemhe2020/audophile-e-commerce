@@ -41,12 +41,15 @@ export default async function CategoryPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen">
       <Header title={sanityCategory?.name || localCategory?.category || ''} />
-      <div className="mx-6 md:mx-10 my-[80px] bg-[#FFFFFF]">
-      <ProductList products={localCategory?.items || sanityCategory?.products || []} />
+      <div className="container mx-auto px-4 md:px-8 lg:px-12">
+        <div className="mx-6 md:mx-10 my-[60px] md:my-[80px] bg-[#FFFFFF]">
+          <ProductList products={localCategory?.items || sanityCategory?.products || []} />
+        </div>
+        <ProductCat/>
       </div>
-      <ProductCat/>
     </div>
   );
 }
+

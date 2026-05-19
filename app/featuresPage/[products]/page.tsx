@@ -53,12 +53,12 @@ export default async function FeaturePage({ params }: Props) {
         <div className="">
         <ProductPage
           _id={sanityProduct?._id || ''}
-          productName={sanityProduct?.name }
-          shortName={sanityProduct?.shortName || sanityProduct?.name}
-          slug={sanityProduct?.slug|| ''}
-          features={sanityProduct?.features  || ''}
+          productName={sanityProduct?.name}
+          shortName={sanityProduct?.shortName || sanityProduct?.name} // ✅ add this
+          slug={sanityProduct?.slug || ''}
+          features={sanityProduct?.features || ''}
           inTheBox={sanityProduct?.inTheBox || localFeature?.inthebox || []}
-          mainImage={ urlFor(sanityProduct?.mainImage).url() || ''} // Fallback to first product image
+          mainImage={urlFor(sanityProduct?.mainImage).url() || ''}
           price={sanityProduct?.price || 0}
         />
         <PhotoGrid

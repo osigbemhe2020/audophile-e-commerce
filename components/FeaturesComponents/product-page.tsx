@@ -13,15 +13,15 @@ import InTheBoxSection from "./in-box-section"
 type ProductProps = {
   _id: string;
   productName: string;
+  shortName: string;
   slug: string;
   features: string;
   inTheBox: string[];
   mainImage: StaticImageData | string;
   price: number;
-  shortName: string;
 };
 
-export default function ProductPage({ _id, productName, slug, features, shortName, inTheBox, mainImage, price }: ProductProps) {
+export default function ProductPage({ _id, productName, shortName, slug, features, inTheBox, mainImage, price }: ProductProps) {
   const [quantity, setQuantity] = useState(1)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const { addToCart } = useCartStore()
@@ -32,29 +32,29 @@ export default function ProductPage({ _id, productName, slug, features, shortNam
         ? mainImage
         : (mainImage as StaticImageData).src;
 
-    // ✅ Just add to Zustand store — persisted to localStorage automatically
+    // ✅ Just add to Zustand — persisted to localStorage automatically
     addToCart({
       id: slug,
       name: productName,
-      shortName: shortName,
+      shortName: shortName, // ✅ uses real shortName from Sanity
       price,
       quantity,
       image: imageSrc,
     });
 
-    setIsCartOpen(true); // ✅ Open modal instantly
+    setIsCartOpen(true); // ✅ opens modal instantly
   };
 
   const incrementQuantity = () => setQuantity((q) => q + 1)
   const decrementQuantity = () => setQuantity((q) => (q > 1 ? q - 1 : 1))
 
   return (
-    <main className="w-full px-[165px] bg-white">
-      <div className="mt-[79px]">
+    <main className="w-full px-8 md:px-8 lg:px-[165px] bg-white">
+      <div className="mt-[20px] md:mt-[20px] lg:mt-[79px]">
         <Link href="./" className="text-sm">Go Back</Link>
       </div>
 
-      <section className="mt-[56px] max-w-7xl">
+      <section className="mt-[20px] md:mt-[40px] lg:mt-[56px] max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
           <div className="flex items-start justify-start rounded-lg">
             <Image
@@ -62,7 +62,7 @@ export default function ProductPage({ _id, productName, slug, features, shortNam
               alt={productName}
               width={540}
               height={560}
-              className="object-contain"
+              className="object-contain h-[400px] md:h-[560px]"
             />
           </div>
           <div className="flex h-full items-center justify-center">

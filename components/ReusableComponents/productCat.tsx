@@ -9,8 +9,8 @@ import Earphones from '@/assets/product-yx1-earphones/desktop/image-category-pag
 const ProductCat = () => {
   const router = useRouter();
   return (
-    <section className="container mx-auto px-4 py-16">
-      <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+    <section className="container mx-auto p-4 md:p-6 lg:p-8 xl:p-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 xl:gap-10 max-w-7xl mx-auto">
         {/* Headphones */}
         <div 
           className="flex flex-col items-center cursor-pointer group" 

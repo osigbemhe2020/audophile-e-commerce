@@ -10,18 +10,16 @@ export interface CartProduct {
   image: string;
 }
 
-interface CartState {
-  cartProducts: CartProduct[];
-}
-
 interface CartActions {
   handleIncrement: (id: string) => void;
   handleDecrement: (id: string) => void;
   clearCart: () => void;
   addToCart: (product: CartProduct) => void;
+  setCart: (products: CartProduct[]) => void;
 }
 
-interface CartStore extends CartState, CartActions {
+interface CartStore extends CartActions {
+  cartProducts: CartProduct[];
   getTotalItems: () => number;
   calculateTotal: () => number;
 }
@@ -36,7 +34,6 @@ export const useCartStore = create<CartStore>()(
           const existingIndex = state.cartProducts.findIndex(
             (item) => item.id === newProduct.id
           );
-
           if (existingIndex !== -1) {
             const updatedCart = [...state.cartProducts];
             updatedCart[existingIndex] = {
@@ -45,7 +42,6 @@ export const useCartStore = create<CartStore>()(
             };
             return { cartProducts: updatedCart };
           }
-
           return { cartProducts: [...state.cartProducts, newProduct] };
         });
       },
@@ -68,11 +64,13 @@ export const useCartStore = create<CartStore>()(
                 ? { ...product, quantity: product.quantity - 1 }
                 : product
             )
-            .filter((product) => product.quantity > 0), // ✅ remove if hits 0
+            .filter((product) => product.quantity > 0),
         }));
       },
 
       clearCart: () => set({ cartProducts: [] }),
+
+      setCart: (products: CartProduct[]) => set({ cartProducts: products }),
 
       getTotalItems: () => {
         return get().cartProducts.reduce(
@@ -89,7 +87,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: "cart-storage", // ✅ localStorage key
+      name: "cart-storage",
     }
   )
 );

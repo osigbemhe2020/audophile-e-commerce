@@ -1,5 +1,4 @@
 import Image from "next/image";
-import type { StaticImageData } from "next/image";
 
 interface OrderItemProps {
   item: {
@@ -7,7 +6,7 @@ interface OrderItemProps {
     name: string
     price: number
     quantity: number
-    image: StaticImageData
+    image: string
   }
 }
 

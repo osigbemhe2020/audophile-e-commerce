@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="">
        <Hero/>
-       <section className="px-[165px]">
+       <section className="px-5 md:px-5 lg:px-[165px]">
         <Ads/>
         <Desc/>
        </section>

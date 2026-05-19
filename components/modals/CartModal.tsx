@@ -31,11 +31,19 @@ const CartItem = ({ id, shortName, price, quantity, image, onIncrement, onDecrem
       </div>
     </div>
     <div className="flex items-center gap-2 bg-[var(--main-grey)] p-2 rounded">
-      <button onClick={() => onDecrement(id)} className="border-none p-2 rounded cursor-pointer hover:opacity-80" aria-label="Decrease quantity">
+      <button
+        onClick={() => onDecrement(id)}
+        className="border-none p-2 rounded cursor-pointer hover:opacity-80"
+        aria-label="Decrease quantity"
+      >
         <Minus size={12} />
       </button>
       <span className="w-8 text-center text-base font-bold text-[var(--main-black)]">{quantity}</span>
-      <button onClick={() => onIncrement(id)} className="border-none p-2 rounded cursor-pointer hover:opacity-80" aria-label="Increase quantity">
+      <button
+        onClick={() => onIncrement(id)}
+        className="border-none p-2 rounded cursor-pointer hover:opacity-80"
+        aria-label="Increase quantity"
+      >
         <Plus size={12} />
       </button>
     </div>

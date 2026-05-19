@@ -1,65 +1,46 @@
 "use client"
-
 import type React from "react"
-
-import { useState } from "react"
+import { FormData, FormErrors } from "./check-out-form"
 
 interface PaymentSectionProps {
-  paymentMethod: string
-  setPaymentMethod: (method: string) => void
+  formData: FormData
+  errors: FormErrors
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function PaymentSection({ paymentMethod, setPaymentMethod }: PaymentSectionProps) {
-  const [paymentData, setPaymentData] = useState({
-    moneyNumber: "",
-    emoneyPin: "",
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setPaymentData((prev) => ({ ...prev, [name]: value }))
-  }
-
+export default function PaymentSection({ formData, errors, onChange }: PaymentSectionProps) {
   return (
     <div>
-      
       <h6 className="text-[var(--main-orange)] mb-6">PAYMENT DETAILS</h6>
       <div className="space-y-6">
-        {/* Payment Method */}
+
         <div>
           <p className="text-sm font-medium text-gray-900 mb-4">Payment Method</p>
           <div className="space-y-3">
-            {/* e-Money Option */}
             <label
-              className="flex items-center p-4 border-2 border-gray-300 rounded cursor-pointer hover:border-orange-500 transition-colors"
-              style={{ borderColor: paymentMethod === "emoney" ? "var(--main-orange)" : "#D1D5DB" }}
+              className="flex items-center p-4 border-2 rounded cursor-pointer hover:border-orange-500 transition-colors"
+              style={{ borderColor: formData.paymentMethod === "emoney" ? "var(--main-orange)" : "#D1D5DB" }}
             >
               <input
                 type="radio"
                 name="paymentMethod"
                 value="emoney"
-                checked={paymentMethod === "emoney"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-4 h-4 text-[var(--main-orange)] accent-[var(--main-orange)]"
+                checked={formData.paymentMethod === "emoney"}
+                onChange={onChange}
+                className="w-4 h-4 accent-[var(--main-orange)]"
               />
-              <div className="flex items-center ml-3">
-                <div className="w-5 h-5 rounded-full bg-[var(--main-orange)] flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
-                  </svg>
-                </div>
-                <span className="ml-3 font-medium text-gray-900">e-Money</span>
-              </div>
+              <span className="ml-3 font-medium text-gray-900">e-Money</span>
             </label>
 
-            {/* Cash on Delivery Option */}
-            <label className="flex items-center p-4 border-2 border-gray-300 rounded cursor-pointer hover:border-orange-500 transition-colors">
+            <label className="flex items-center p-4 border-2 border-gray-300 rounded cursor-pointer hover:border-orange-500 transition-colors"
+              style={{ borderColor: formData.paymentMethod === "cash" ? "var(--main-orange)" : "#D1D5DB" }}
+            >
               <input
                 type="radio"
                 name="paymentMethod"
                 value="cash"
-                checked={paymentMethod === "cash"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
+                checked={formData.paymentMethod === "cash"}
+                onChange={onChange}
                 className="w-4 h-4 accent-gray-300"
               />
               <span className="ml-3 font-medium text-gray-900">Cash on Delivery</span>
@@ -67,33 +48,39 @@ export default function PaymentSection({ paymentMethod, setPaymentMethod }: Paym
           </div>
         </div>
 
-        {/* e-Money Fields */}
-        {paymentMethod === "emoney" && (
+        {formData.paymentMethod === "emoney" && (
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">Money Number</label>
+              <div className="flex justify-between mb-2">
+                <label className="block text-sm font-medium text-gray-900">e-Money Number</label>
+                {errors.moneyNumber && <span className="text-red-500 text-xs">{errors.moneyNumber}</span>}
+              </div>
               <input
                 type="text"
                 name="moneyNumber"
-                value={paymentData.moneyNumber}
-                onChange={handleChange}
+                value={formData.moneyNumber}
+                onChange={onChange}
                 placeholder="238521993"
-                className="w-full px-4 py-3 border border-gray-300 rounded bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`w-full px-4 py-3 border rounded bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent ${errors.moneyNumber ? 'border-red-500' : 'border-gray-300'}`}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">e-Money PIN</label>
+              <div className="flex justify-between mb-2">
+                <label className="block text-sm font-medium text-gray-900">e-Money PIN</label>
+                {errors.emoneyPin && <span className="text-red-500 text-xs">{errors.emoneyPin}</span>}
+              </div>
               <input
                 type="text"
                 name="emoneyPin"
-                value={paymentData.emoneyPin}
-                onChange={handleChange}
+                value={formData.emoneyPin}
+                onChange={onChange}
                 placeholder="6891"
-                className="w-full px-4 py-3 border border-gray-300 rounded bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`w-full px-4 py-3 border rounded bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent ${errors.emoneyPin ? 'border-red-500' : 'border-gray-300'}`}
               />
             </div>
           </div>
         )}
+
       </div>
     </div>
   )
