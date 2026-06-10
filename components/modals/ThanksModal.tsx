@@ -14,6 +14,12 @@ interface ThankYouModalProps {
 const ThankYouModal = ({ isOpen, onClose, items, grandTotal }: ThankYouModalProps) => {
   const [showAllItems, setShowAllItems] = useState(false);
 
+  const shipping = 50;
+  const vat = Math.round(grandTotal * 0.2);
+
+  const shippingAndVat = shipping + vat;
+  const total = grandTotal + shippingAndVat;
+
   if (!isOpen) return null;
 
   const displayedItems = showAllItems ? items : items.slice(0, 1);
@@ -100,6 +106,12 @@ const ThankYouModal = ({ isOpen, onClose, items, grandTotal }: ThankYouModalProp
               </p>
               <p className="text-white font-bold text-lg">
                 $ {grandTotal.toLocaleString()}
+              </p>
+              <p className="text-white font-bold text-lg">
+                + $ {shippingAndVat.toLocaleString()} <span className="text-[8px]">(shipping & VAT)</span>
+              </p>
+              <p className="text-white font-bold text-lg">
+                <span className="text-lg">Total:</span> $ {total.toLocaleString()}
               </p>
             </div>
           </div>

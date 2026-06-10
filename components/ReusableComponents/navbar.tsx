@@ -56,21 +56,21 @@ export default function Navbar({ isCartOpen, setIsCartOpen, isMobile, isTablet }
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
-    const syncOnLogin = async () => {
-      if (!session?.user?.id) return;
+  const syncOnLogin = async () => {
+    if (!session?.user?.id) return;
 
-      // ✅ Always fetch from Sanity — this is the source of truth
-      const sanityCart = await fetchCartFromSanity(session.user.id);
+    const lastUserId = localStorage.getItem("last-user-id");
 
-      // ✅ Replace local cart with Sanity cart
-      setCart(sanityCart);
+    // ✅ Only sync if this is a fresh login
+    if (lastUserId === session.user.id) return; // ← already synced, skip
 
-      // ✅ Remember this user
-      localStorage.setItem("last-user-id", session.user.id);
-    };
+    const sanityCart = await fetchCartFromSanity(session.user.id);
+    setCart(sanityCart);
+    localStorage.setItem("last-user-id", session.user.id);
+  };
 
-    syncOnLogin();
-  }, [session?.user?.id]);
+  syncOnLogin();
+}, [session?.user?.id]);
 
   const handleUserClick = () => {
     if (dropdownRef.current) {
