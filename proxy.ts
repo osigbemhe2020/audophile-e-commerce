@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 
 const ADMIN_GITHUB_ID = process.env.ADMIN_GITHUB_ID;
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
 
   // ✅ Not logged in — redirect to signin

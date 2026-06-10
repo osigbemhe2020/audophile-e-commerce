@@ -11,6 +11,7 @@
   "dependencies": {
     "@sanity/client": "^7.16.0",
     "@sanity/image-url": "^1.2.0",
+    "@sanity/types": "^5.30.0",
     "@sanity/vision": "^4.22.0",
     "dotenv": "^17.3.1",
     "lucide-react": "^0.552.0",
@@ -30,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "baseline-browser-mapping": "^2.10.35",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
     "tailwindcss": "^4",
