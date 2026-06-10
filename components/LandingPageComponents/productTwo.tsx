@@ -5,7 +5,7 @@ import SpeakerImg from "@/assets/home/desktop/image-speaker-zx7.jpg";
 const Index = () => {
   const router = useRouter();
   return (
-      <section className="container mx-auto px-4 md:px-8 lg:px-12">
+      <section className="mx-auto ">
         <div 
           className="relative bg-gray-300 mx-auto my-8 h-[200px] md:h-[280px] lg:h-[320px] overflow-hidden bg-cover bg-center bg-no-repeat rounded-lg"
           style={{ backgroundImage: `url(${SpeakerImg.src})` }}

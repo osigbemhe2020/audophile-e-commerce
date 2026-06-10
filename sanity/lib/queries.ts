@@ -21,14 +21,19 @@ export const allCategoryQuery = groq`
   name,
   "slug": slug.current,
   description,
-
   "products": *[_type == "product" && references(^._id)]{
     _id,
     name,
+    shortName,
     "slug": slug.current,
     price,
     description,
-    isNew
+    isNew,
+    mainImage{
+      asset->{
+        url
+      }
+    }
   }
 }
 `;

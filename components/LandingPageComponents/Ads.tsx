@@ -23,12 +23,12 @@ export default function Ads() {
         </div>
 
         {/* ZX7 Speaker Section */}
-        <div className="mt-16 md:mt-20 lg:mt-24">
+        <div className="  mt-16 md:mt-20 lg:mt-24">
           <ProductTwo />
         </div>
 
         {/* YX1 Earphones Section */}
-        <div className="mt-20 md:mt-24 lg:mt-28">
+        <div className="  mt-20 md:mt-24 lg:mt-28">
           <ProductShowcase />
         </div>
       </div>

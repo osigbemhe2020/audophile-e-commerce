@@ -27,7 +27,7 @@ export default async function CategoryPage({ params }: Props) {
   );
   
   // Use Sanity data if available, otherwise fallback to local
-  const categoryData = sanityCategory || localCategory;
+  const categoryData = sanityCategory ;
   
   if (!categoryData) {
     return (
@@ -45,7 +45,7 @@ export default async function CategoryPage({ params }: Props) {
       <Header title={sanityCategory?.name || localCategory?.category || ''} />
       <div className="container mx-auto px-4 md:px-8 lg:px-12">
         <div className="mx-6 md:mx-10 my-[60px] md:my-[80px] bg-[#FFFFFF]">
-          <ProductList products={localCategory?.items || sanityCategory?.products || []} />
+          <ProductList products={ sanityCategory?.products || []} />
         </div>
         <ProductCat/>
       </div>

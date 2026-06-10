@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const ProductShowcase = () => {
   const router = useRouter();
   return (
-    <section className="container mx-auto px-4 md:px-8 lg:px-12 py-8">
+    <section className="container mx-auto ">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 rounded-lg overflow-hidden">
         {/* Left: Product Image with Dark Background */}
         <div className="relative h-[200px] md:h-[280px] lg:h-[320px]">

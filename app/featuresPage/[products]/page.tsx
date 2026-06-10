@@ -8,12 +8,24 @@ import SmallHeader from "@/components/ReusableComponents/smallHeader";
 import { client } from "@/sanity/lib/client";
 import { allProductsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { StaticImageData } from "next/image";
+import type { SanityImageSource } from "@sanity/image-url/lib/types"; // also fix this import
 
 type Props = {
   params: Promise<{
     products: string;
   }>;
+};
+
+type Product = {
+  _id?: string;
+  slug?: string;
+  name?: string;
+  shortName?: string;
+  features?: string;
+  inTheBox?: string[];
+  mainImage?: SanityImageSource;
+  price?: number;
+  gallery?: SanityImageSource[];
 };
 
 const NoProduct = () => {
@@ -31,14 +43,14 @@ export default async function FeaturePage({ params }: Props) {
     const { products } = await params;
 
     // Get data from Sanity
-    const sanityProducts = await client.fetch(allProductsQuery);
-    const sanityProduct = sanityProducts.find((p: any) => p.slug === products);
+    const sanityProducts = await client.fetch<Product[]>(allProductsQuery);
+    const sanityProduct = sanityProducts.find((p: Product) => p.slug === products);
 
     // Get images from local features data
     const localFeature = Features.find((p) => p.slug === products);
 
     console.log('Sanity product>>>>>', sanityProduct);
-    console.log('Local feature>>>>>', localFeature);
+    
 
     // Use Sanity data if available, otherwise fallback to local
     const productData = sanityProduct || localFeature;
@@ -53,8 +65,8 @@ export default async function FeaturePage({ params }: Props) {
         <div className="">
         <ProductPage
           _id={sanityProduct?._id || ''}
-          productName={sanityProduct?.name}
-          shortName={sanityProduct?.shortName || sanityProduct?.name} // ✅ add this
+          productName={sanityProduct?.name || 'Unknown Product'}
+          shortName={sanityProduct?.shortName || sanityProduct?.name || 'Unknown Product'} // ✅ add this
           slug={sanityProduct?.slug || ''}
           features={sanityProduct?.features || ''}
           inTheBox={sanityProduct?.inTheBox || localFeature?.inthebox || []}
